@@ -31,8 +31,10 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+        dd($user);
         $client->loginUser($user);
         $client->request(Request::METHOD_GET, '/users/create');
+        dd($client->getResponse());
         $client->submitForm('Ajouter', [
             'user[username]' => 'user1',
             'user[password][first]' => 'password',
