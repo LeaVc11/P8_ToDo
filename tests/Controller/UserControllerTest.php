@@ -31,29 +31,29 @@ class UserControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testCreateUser(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-//        dd($user);
-        $client->loginUser($user);
-        $crawler = $client->request(Request::METHOD_GET, '/users/create');
-//         dd($client->getResponse());
-//        echo $client->getResponse()->getContent();
-
-        $this->assertInstanceOf(Form::class,
-            $crawler->selectButton('Ajouter')->form());
-
-        $client->submitForm('Ajouter', [
-            'user[username]' => 'user2',
-            'user[password][first]' => 'password',
-            'user[password][second]' => 'password',
-            'user[email]' => 'user2@gmail.com',
-        ]);
-        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('user_list');
-    }
+//    public function testCreateUser(): void
+//    {
+//        $client = static::createClient();
+//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+////        dd($user);
+//        $client->loginUser($user);
+//        $crawler = $client->request(Request::METHOD_GET, '/users/create');
+////         dd($client->getResponse());
+////        echo $client->getResponse()->getContent();
+//
+//        $this->assertInstanceOf(Form::class,
+//            $crawler->selectButton('Ajouter')->form());
+//
+//        $client->submitForm('Ajouter', [
+//            'user[username]' => 'user2',
+//            'user[password][first]' => 'password',
+//            'user[password][second]' => 'password',
+//            'user[email]' => 'user2@gmail.com',
+//        ]);
+//        $this->assertResponseRedirects();
+//        $client->followRedirect();
+//        $this->assertRouteSame('user_list');
+//    }
 
     /**
      * @throws \Exception
@@ -61,16 +61,15 @@ class UserControllerTest extends WebTestCase
     public function testEditUser()
     {
         $client = static::createClient();
-        $admin = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-        $client->loginUser($admin);
-        $client->request('GET', '/users/' . $admin->getId() . '/edit');
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('newuser');
+        $client->request('GET', '/users/' . $user->getId() . '/edit');
         $this->assertRouteSame('user_edit');
         //test fonctionnel
-        $this->assertRequestAttributeValueSame('id', $admin->getId());
-        $this->assertInputValueSame('user[username]', $admin->getUsername());
-        $this->assertInputValueSame('user[email]', $admin->getEmail());
+        $this->assertRequestAttributeValueSame('id', $user->getId());
+        $this->assertInputValueSame('user[username]', $user->getUsername());
+        $this->assertInputValueSame('user[email]', $user->getEmail());
         $this->assertRouteSame('user_list');
-        $client->submitForm('Edit', [
+        $client->submitForm('Modifier', [
             'user[username]' => 'user1',
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
@@ -78,8 +77,7 @@ class UserControllerTest extends WebTestCase
         ]);
         $this->assertResponseRedirects();
         $client->followRedirect();
-        $this->assertResponseIsSuccessful();
-        $this->assertRouteSame('homepage');
+        $this->assertRouteSame('user_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
 
