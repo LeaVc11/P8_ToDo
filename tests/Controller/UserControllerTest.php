@@ -61,16 +61,16 @@ class UserControllerTest extends WebTestCase
     public function testEditUser()
     {
         $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('newuser');
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
         $client->request('GET', '/users/' . $user->getId() . '/edit');
         $this->assertRouteSame('user_edit');
         //test fonctionnel
         $this->assertRequestAttributeValueSame('id', $user->getId());
         $this->assertInputValueSame('user[username]', $user->getUsername());
         $this->assertInputValueSame('user[email]', $user->getEmail());
-        $this->assertRouteSame('user_list');
+        $this->assertRouteSame('user_edit');
         $client->submitForm('Modifier', [
-            'user[username]' => 'user1',
+            'user[username]' => 'user4',
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
             'user[email]' => 'user1@gmail.com',
