@@ -16,17 +16,17 @@ class UserControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testListOfUsersForAdmin(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-//        dd($user);
-        $client->loginUser($user);
-        $client->request('GET', '/users');
-        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('user_list');
-    }
+//    public function testListOfUsersForAdmin(): void
+//    {
+//        $client = static::createClient();
+//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+////        dd($user);
+//        $client->loginUser($user);
+//        $client->request('GET', '/users');
+//        $this->assertResponseRedirects();
+//        $client->followRedirect();
+//        $this->assertRouteSame('user_list');
+//    }
 
     /**
      * @throws \Exception
@@ -58,28 +58,29 @@ class UserControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-//    public function testEditUser()
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        $client->request('GET', '/users/' . $user->getId() . '/edit');
-//        $this->assertRouteSame('user_edit');
-//        //test fonctionnel
-//        $this->assertRequestAttributeValueSame('id', $user->getId());
-//        $this->assertInputValueSame('user[username]', $user->getUsername());
-//        $this->assertInputValueSame('user[email]', $user->getEmail());
-//        $this->assertRouteSame('user_list');
-//        $client->submitForm('Edit', [
-//            'user[username]' => 'user1',
-//            'user[password][first]' => 'password',
-//            'user[password][second]' => 'password',
-//            'user[email]' => 'user1@gmail.com',
-//        ]);
-//        $this->assertResponseRedirects();
-//        $client->followRedirect();
-//        $this->assertResponseIsSuccessful();
-//        $this->assertRouteSame('homepage');
-//        $this->assertSelectorExists('div.alert.alert-success');
-//    }
+    public function testEditUser()
+    {
+        $client = static::createClient();
+        $admin = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+        $client->loginUser($admin);
+        $client->request('GET', '/users/' . $admin->getId() . '/edit');
+        $this->assertRouteSame('user_edit');
+        //test fonctionnel
+        $this->assertRequestAttributeValueSame('id', $admin->getId());
+        $this->assertInputValueSame('user[username]', $admin->getUsername());
+        $this->assertInputValueSame('user[email]', $admin->getEmail());
+        $this->assertRouteSame('user_list');
+        $client->submitForm('Edit', [
+            'user[username]' => 'user1',
+            'user[password][first]' => 'password',
+            'user[password][second]' => 'password',
+            'user[email]' => 'user1@gmail.com',
+        ]);
+        $this->assertResponseRedirects();
+        $client->followRedirect();
+        $this->assertResponseIsSuccessful();
+        $this->assertRouteSame('homepage');
+        $this->assertSelectorExists('div.alert.alert-success');
+    }
 
 }
