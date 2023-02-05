@@ -20,7 +20,7 @@ class SecurityControllerTest extends WebTestCase
             '_password' => 'user',
         ]);
         $client->followRedirect();
-        $this->assertRouteSame('homepage');
+        $this->assertRouteSame('login');
     }
 
 }
