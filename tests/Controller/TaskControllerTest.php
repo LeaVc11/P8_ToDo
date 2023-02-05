@@ -10,6 +10,7 @@ class TaskControllerTest extends WebTestCase
     public function testListTask(): void
     {
         $client = static::createClient();
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
         $client->request('GET', '/users');
         $this->assertResponseRedirects();
         $client->followRedirect();
