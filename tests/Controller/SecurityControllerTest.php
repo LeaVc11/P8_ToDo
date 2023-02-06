@@ -16,11 +16,11 @@ class SecurityControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request(Request::METHOD_GET, '/login');
         $client->submitForm('Se connecter', [
-            '_username' => 'user',
-            '_password' => 'user',
+            '_username' => 'admin',
+            '_password' => 'admin',
         ]);
         $client->followRedirect();
-        $this->assertRouteSame('login');
+        $this->assertRouteSame('homepage');
     }
 
 }
