@@ -20,7 +20,7 @@ class UserRepositoryTest extends KernelTestCase
         //Accèder aux container, pour les tests qui utilisent kernel tests, la possibilité d'accèder à un conteneur
         //dans ce contenueur de récupérer mon UserRepo
         //je lui demande de récupérer mon UserRpo, dc va me permettre de récup un repo qui est déjà tous configurés,
-        $userRepository = new UserRepository(static::getContainer()->get(ManagerRegistry::class));ccccc
+        $userRepository = new UserRepository(static::getContainer()->get(ManagerRegistry::class));
         //récupère un utilisateur par son nom d'utilisateur à l'aide de la findOneBy()méthode.
         // L'argument de cette méthode est un tableau avec une seule paire clé/valeur, 'username' => 'user'
         // ,qui spécifie la valeur du nom d'utilisateur à rechercher.
