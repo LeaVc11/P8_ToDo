@@ -14,17 +14,14 @@ class AppFixtures extends Fixture
         private readonly PasswordHasherFactoryInterface $passwordHasher
     ) {
     }
-
     public function load(ObjectManager $manager): void
     {
-
         $user = (new User())
             ->setUsername('user')
             ->setEmail('user@user.user')
             ->setPassword($this->passwordHasher->getPasswordHasher(User::class)->hash('user'))
         ;
         $manager->persist($user);
-
         $admin = (new User())
             ->setUsername('admin')
             ->setEmail('admin@admin.admin')
@@ -32,7 +29,6 @@ class AppFixtures extends Fixture
             ->setPassword($this->passwordHasher->getPasswordHasher(User::class)->hash('admin'))
         ;
         $manager->persist($admin);
-
         $anonymousTask = (new Task())
             ->setTitle('Anonymous Task')
             ->setContent('Contenu d\'une tâche anonyme.')

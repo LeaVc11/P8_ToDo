@@ -51,7 +51,6 @@ class Task
 //
 //        return $this;
 //    }
-
     public function getTitle(): ?string
     {
         return $this->title;

@@ -65,7 +65,6 @@ class UserControllerTest extends WebTestCase
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
         $client->request('GET', '/users/' . $user->getId() . '/edit');
         $this->assertRouteSame('user_edit');
-        //test fonctionnel
         $this->assertRequestAttributeValueSame('id', $user->getId());
         $this->assertInputValueSame('user[username]', $user->getUsername());
         $this->assertInputValueSame('user[email]', $user->getEmail());
