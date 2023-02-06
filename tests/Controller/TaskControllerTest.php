@@ -43,7 +43,6 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
     }
 //testToggleTask
-//testEditTask
     /**
      * @throws \Exception
      */
@@ -74,13 +73,20 @@ class TaskControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-//    public function testDeleteTask()
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findByUsername('user');
-//        $task = $user->getTasks()->first();
-//        $client->request('GET','tasks/'. $task->getId().'/delete');
-//
-//    }
+    public function testDeleteTask()
+    {
+        $client = static::createClient();
+        $user = static::getContainer()->get(UserRepository::class)->findByUsername('user');
+//        dd($user);
+        $client->loginUser($user);
+        $crawler = $client->request('GET', '/tasks/' . $task->getId() . '/delete');
+        $this->assertInstanceOf(Form::class,
+            $crawler->selectButton('Supprimer')->form());
+        $this->assertResponseRedirects();
+        $client->followRedirect();
+        $this->assertRouteSame('task_list');
+        $this->assertSelectorExists('div.alert.alert-success');
+
+    }
 
 }
