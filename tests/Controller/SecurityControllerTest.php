@@ -22,5 +22,18 @@ class SecurityControllerTest extends WebTestCase
         $client->followRedirect();
         $this->assertRouteSame('homepage');
     }
+    public function testInvalidCredentials(): void
+    {
+        $client = static::createClient();
+        $client->request(Request::METHOD_GET, '/login');
+        $client->submitForm('Se connecter', [
+            '_username' => 'user',
+            '_password' => 'admin',
+        ]);
+        $client->followRedirect();
+        $this->assertRouteSame('login');
+    }
+
+
 
 }
