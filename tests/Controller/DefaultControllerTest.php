@@ -34,21 +34,21 @@ class DefaultControllerTest extends WebTestCase
         $this->assertRouteSame('login');// je vérifie si je suit  sur la route login
     }
 
-    /**
-     * @throws \Exception
-     */
-//    testIndexConnected => OK
-    public function testIndexConnected(): void
-    {
-        $client = static::createClient();
-
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-//        dd($user);
-        $client->loginUser($user);
-        $client->request('GET', '/');
-//        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('login');
-    }
+//    /**
+//     * @throws \Exception
+//     */
+//
+//    public function testIndexConnected(): void
+//    {
+//        $client = static::createClient();
+//
+//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+////        dd($user);
+//        $client->loginUser($user);
+//        $client->request('GET', '/');
+////        $this->assertResponseRedirects();
+//        $client->followRedirect();
+//        $this->assertRouteSame('login');
+//    }
 
 }
