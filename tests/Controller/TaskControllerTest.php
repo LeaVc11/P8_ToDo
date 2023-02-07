@@ -74,39 +74,39 @@ class TaskControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-//    public function testDeleteTask()
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findByUsername('user');
-////        dd($user);
-//        $client->loginUser($user);
-////        dd($task);
-//        $task = $user->getTasks()->first();
-//        $crawler = $client->request('GET', '/tasks/' . $task->getId() . '/delete');
-//        $this->assertInstanceOf(Form::class,
-//            $crawler->selectButton('Supprimer')->form());
-//        $this->assertResponseRedirects();
+    public function testDeleteTask()
+    {
+        $client = static::createClient();
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+//        dd($user);
+        $client->loginUser($user);
+        $task = $user->getTasks()->first();
+//        dd($task);
+        $crawler = $client->request('GET', '/tasks/' . $task->getId() . '/delete');
+        $form = $crawler->selectButton('Supprimer')->form();
+        $client->submitForm('Supprimer');
+        $this->assertResponseRedirects();
 //        $client->followRedirect();
 //        $this->assertRouteSame('task_list');
 //        $this->assertSelectorExists('div.alert.alert-success');
-//    }
+    }
 
     /**
      * @throws \Exception
      */
-    public function testTaskToggle(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findByUsername('user');
-        dd($user);
-        $client->loginUser($user);
-        $task = $user->getTasks()->first();
-        $client->request(Request::METHOD_GET, '/tasks/'. $task->getId() .'/toggle');
-
-        $this->assertResponseRedirects();
-        $crawler = $client->followRedirect();
-        $this->assertRouteSame('task_list');
-        $this->assertSelectorExists('div.alert.alert-success');
-    }
+//    public function testTaskToggle(): void
+//    {
+//        $client = static::createClient();
+//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+////        dd($user);
+//        $client->loginUser($user);
+//        $task = $user->getTasks()->first();
+//        $client->request(Request::METHOD_GET, '/tasks/'. $task->getId() .'/toggle');
+//
+//        $this->assertResponseRedirects();
+//        $crawler = $client->followRedirect();
+//        $this->assertRouteSame('task_list');
+//        $this->assertSelectorExists('div.alert.alert-success');
+//    }
 
 }

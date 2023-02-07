@@ -41,7 +41,6 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request(Request::METHOD_GET, '/users/create');
 //         dd($client->getResponse());
 //        echo $client->getResponse()->getContent();
-
         $this->assertInstanceOf(Form::class,
             $crawler->selectButton('Ajouter')->form());
 
