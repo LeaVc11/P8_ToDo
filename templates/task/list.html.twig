@@ -41,5 +41,21 @@
         {% endfor %}
     </div>
     <br>
+    {% if is_granted('ROLE_ADMIN') %}
+        <h2>Tâches anonyme</h2>
+        <div class="row anonymous-tasks">
+            {% for task in anonymous_tasks %}
+                {% if not task.user %}
+                    {{ include('task/_task.html.twig', {task: task}) }}
+                {% endif %}
+            {% else %}
+                <div class="col-lg-12">
+                    <div class="alert alert-secondary" role="alert">
+                        <p>Il n'y a aucune tâche anonyme.</p>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
     <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
 {% endblock %}

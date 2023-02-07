@@ -26,12 +26,14 @@ class TaskController extends AbstractController
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
+        $anonymousTasks = null;
         $tasks = $taskRepository->orderByStatus();
 
         return $this->render(
             'task/list.html.twig',
             [
-                'tasks' => $tasks
+                'tasks' => $tasks,
+                'anonymous_tasks' => $anonymousTasks
             ]
         );
     }
