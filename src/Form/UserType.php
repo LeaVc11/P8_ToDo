@@ -2,15 +2,24 @@
 
 namespace App\Form;
 
+use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\CallbackTransformer;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserType extends AbstractType
 {
+    public function __construct(private readonly AuthorizationCheckerInterface $accessControl)
+    {
+    }
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
@@ -30,6 +39,43 @@ class UserType extends AbstractType
                 [
                     'label' => "Adresse email"
                 ]);
+        if ($this->accessControl->isGranted('ROLE_ADMIN')) {
+            $builder->add('roles', ChoiceType::class, [
+                'label' => 'Rôle',
+                'choices' => [
+                    'Utilisateur/rice' => 'ROLE_USER',
+                    'Administrateur/rice' => 'ROLE_ADMIN'
+                ],
+            ]);
+            $builder->get('roles')->addModelTransformer(new CallbackTransformer(
+                function ($rolesArray) {
+                    if (in_array('ROLE_ADMIN', $rolesArray)) {
+                        return 'ROLE_ADMIN';
+                    }
+                    return 'ROLE_USER';
+                },
+                function ($rolesString) {
+                    return [$rolesString];
+                }
+            ));
+            $builder->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                [$this, 'onPostSetData']
+            );
+        }
+    }
 
+    public function onPostSetData(FormEvent $event): void
+    {
+        $form = $event->getForm();
+        $data = $event->getData();
+        if ($data) {
+            if ($data instanceof User) {
+                if ($data->getPassword() === null) {
+                    return;
+                }
+            }
+            $form->remove('password');
+        }
     }
 }
