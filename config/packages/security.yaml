@@ -22,8 +22,8 @@ security:
                 path: logout
     access_control:
         - { path: '^/login', roles: PUBLIC_ACCESS }
-        - { path: '^/users', roles: ROLE_ADMIN }
-        - { path: ^/tasks, roles: ROLE_USER }
+        - { path: '^/users', roles: PUBLIC_ACCESS }
+        - { path: '^/', roles: ROLE_USER }
 
 when@test:
     security:
