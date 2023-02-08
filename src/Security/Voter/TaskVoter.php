@@ -23,8 +23,6 @@ class TaskVoter extends Voter
 
     protected function supports(string $attribute, mixed $subject): bool
     {
-        // replace with your own logic
-        // https://symfony.com/doc/current/security/voters.html
         return $attribute == self::DELETE
             && $subject instanceof Task;
     }
@@ -44,7 +42,6 @@ class TaskVoter extends Voter
 
     }
 
-    // $subject => $task | $attribute => const
     private function deleteTask(UserInterface $user, mixed $subject): bool
     {
         if ($user == $subject->getUser()) {

@@ -24,7 +24,6 @@ security:
         - { path: '^/login', roles: PUBLIC_ACCESS }
         - { path: '^/users', roles: PUBLIC_ACCESS }
         - { path: '^/', roles: ROLE_USER }
-
 when@test:
     security:
         password_hashers:
