@@ -38,17 +38,19 @@ class DefaultControllerTest extends WebTestCase
 //     * @throws \Exception
 //     */
 //
-//    public function testIndexConnected(): void
-//    {
-//        $client = static::createClient();
-//
-//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-////        dd($user);
-//        $client->loginUser($user);
-//        $client->request('GET', '/');
-////        $this->assertResponseRedirects();
-//        $client->followRedirect();
-//        $this->assertRouteSame('login');
-//    }
+    /**
+     * @throws \Exception
+     */
+    public function testIndexConnected(): void
+    {
+        $client = static::createClient();
+
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+//        dd($user);
+        $client->loginUser($user);
+        $client->request('GET', '/');
+        $this->assertResponseIsSuccessful();
+        $this->assertRouteSame('homepage');
+    }
 
 }
