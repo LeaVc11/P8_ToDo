@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
 use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Form;
@@ -76,17 +77,35 @@ class TaskControllerTest extends WebTestCase
     public function testDeleteTask()
     {
         $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findByUsername('user');
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
 //        dd($user);
         $client->loginUser($user);
+        $task = $user->getTasks()->first();
+//        dd($task);
         $crawler = $client->request('GET', '/tasks/' . $task->getId() . '/delete');
-        $this->assertInstanceOf(Form::class,
-            $crawler->selectButton('Supprimer')->form());
+//        $form = $crawler->selectButton('Supprimer')->form();
+//        $client->submit($form);
         $this->assertResponseRedirects();
         $client->followRedirect();
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
+    }
 
+    /**
+     * @throws \Exception
+     */
+    public function testTaskToggle(): void
+    {
+        $client = static::createClient();
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+//        dd($user);
+        $client->loginUser($user);
+        $task = $user->getTasks()->first();
+        $client->request(Request::METHOD_GET, '/tasks/'. $task->getId() .'/toggle');
+        $this->assertResponseRedirects();
+        $crawler = $client->followRedirect();
+        $this->assertRouteSame('task_list');
+        $this->assertSelectorExists('div.alert.alert-success');
     }
 
 }
