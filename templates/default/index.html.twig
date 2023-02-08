@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block header_title %}
+    <div class="row justify-content-center">
+
+            <h1>Bienvenue sur <strong class="app-name text-danger">Todo List</strong>, l'application vous permettant de gérer l'ensemble de vos tâches sans effort !</h1>
+
+    </div>
+{% endblock %}
+
+{% block body %}
+                    <a href="{{ path('task_create') }}" class="btn btn-success" role="button">Créer une nouvelle tâche</a>
+
+                    <a href="{{ path('task_list') }}" class="btn btn-warning " role="button">Consulter la liste des tâches</a>
+{% endblock %}
