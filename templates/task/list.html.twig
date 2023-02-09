@@ -6,11 +6,11 @@
 {% block body %}
     <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
     <br>
+    {% if  is_granted('ROLE_ADMIN') %}
         <hr>
         <div class="row mb-2">
         <h2 class="text-center">Toutes les tâches </h2>
             {% for task in tasks %}
-                {% if task.user%}
                     <div class="col-sm-4 col-lg-4 col-md-4 ">
                         <br>
                         <div class="thumbnail">
@@ -36,9 +36,8 @@
                             </div>
                         </div>
                     </div>
-                {% endif %}
             {% endfor %}
-
+    {% endif %}
     </div>
     <hr>
     <h2 class="text-center">Mes tâches </h2>
