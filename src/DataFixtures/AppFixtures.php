@@ -29,6 +29,7 @@ class AppFixtures extends Fixture
             ->setPassword($this->passwordHasher->getPasswordHasher(User::class)->hash('admin'))
         ;
         $manager->persist($admin);
+        
         $anonymousTask = (new Task())
             ->setTitle('Anonymous Task')
             ->setContent('Contenu d\'une tâche anonyme.')

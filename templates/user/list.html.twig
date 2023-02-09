@@ -12,26 +12,25 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
                 <th>Nom d'utilisateur</th>
                 <th>Adresse d'utilisateur</th>
-                <th class="text-right">Actions</th>
+                <th>Actions</th>
+                <th>Rôles</th>
             </tr>
             </thead>
             <tbody>
             {% for user in users %}
                 <tr>
-                    <th scope="row">{{ loop.index }}</th>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
-                    <td class="text-right">
+                    <td>
                         <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Modifier</a>
                     </td>
                     <td>
                         {% for role in  user.roles %}
                             {% if role == 'ROLE_ADMIN' %}
                                 Administrateur/rice
-                            {% elseif role == 'ROLE_USER' %}
+                            {% else %}
                                 Utilisateur/rice
                             {% endif %}
                         {% endfor %}
