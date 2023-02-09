@@ -11,6 +11,7 @@
         <div class="row mb-2">
         <h2 class="text-center">Toutes les tâches </h2>
             {% for task in tasks %}
+                {% if task.user %}
                     <div class="col-sm-4 col-lg-4 col-md-4 ">
                         <br>
                         <div class="thumbnail">
@@ -36,6 +37,7 @@
                             </div>
                         </div>
                     </div>
+                {% endif %}
             {% endfor %}
     {% endif %}
     </div>

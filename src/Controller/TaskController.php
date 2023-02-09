@@ -65,10 +65,7 @@ class TaskController extends AbstractController
         );
     }
 
-    /**
-     * @throws OptimisticLockException
-     * @throws ORMException
-     */
+
     #[Route('/tasks/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
     public function edit(Task $task, Request $request): Response
     {
@@ -112,11 +109,11 @@ class TaskController extends AbstractController
     {
         $this->denyAccessUnlessGranted('DELETE_TASK', $task,
             'vous n\'avez pas accès à la suppression de cette tâche');
-
-        $taskRepository->remove($task);
-
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
-
-        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+        if ($task->getUser() !== null) {
+            $this->getUser()->removeTask($task);
+        }
+            $taskRepository->remove($task);
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
+            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 }

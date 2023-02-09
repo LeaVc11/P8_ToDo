@@ -1,7 +1,4 @@
 <?php
-
-declare(strict_types=1);
-
 namespace App\Repository;
 
 use App\Entity\Task;
@@ -23,11 +20,6 @@ class TaskRepository extends ServiceEntityRepository
         parent::__construct($registry, Task::class);
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @codeCoverageIgnore
-     */
     public function add(Task $entity, bool $flush = true): void
     {
         $this->_em->persist($entity);
@@ -36,11 +28,6 @@ class TaskRepository extends ServiceEntityRepository
         }
     }
 
-    /**
-     * @throws ORMException
-     * @throws OptimisticLockException
-     * @codeCoverageIgnore
-     */
     public function remove(Task $entity, bool $flush = true): void
     {
         $this->_em->remove($entity);
@@ -49,39 +36,6 @@ class TaskRepository extends ServiceEntityRepository
         }
     }
 
-    // /**
-    //  * @return Task[] Returns an array of Task objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Task
-    {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
-
-    /**
-     * Sorts Tasks according whether or not they are "done" or not, with
-     * Tasks still "TODO" first
-     */
     public function orderByStatus(): mixed
     {
         return $this->createQueryBuilder('t')
