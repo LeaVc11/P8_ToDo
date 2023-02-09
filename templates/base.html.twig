@@ -39,9 +39,10 @@
 <!-- Page Content -->
 <div class="container">
     <div class="row">
-        {% if app.user %}
-            {% if is_granted('ROLE_ADMIN') %}
+
                 <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
+            {% if is_granted('ROLE_ADMIN') %}
+                {% if app.user %}
                 <a href="{{ path('user_list') }}" class="btn btn-warning">Consulter la liste des utilisateurs</a>
 
             {% endif %}
