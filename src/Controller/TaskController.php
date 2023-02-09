@@ -10,15 +10,14 @@ use App\Repository\TaskRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
-    public function __construct( private  readonly EntityManagerInterface $entityManager,)
+    public function __construct(private readonly EntityManagerInterface $entityManager,)
     {
 
     }
@@ -26,17 +25,31 @@ class TaskController extends AbstractController
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
-        $anonymousTasks = null;
-        $tasks = $taskRepository->orderByStatus();
 
-        return $this->render(
-            'task/list.html.twig',
-            [
-                'tasks' => $tasks,
-                'anonymous_tasks' => $anonymousTasks
-            ]
-        );
+
+        $anonymousTasks = null;
+        if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
+            $anonymousTasks = $taskRepository->findBy(['user' => [null]], ['title' => 'ASC']);
+        }
+        return $this->render('task/list.html.twig', [
+            'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['title' => 'ASC']),
+            'anonymous_tasks' => $anonymousTasks
+        ]);
+        //findOnby username pr user anony
+//foreach sur task ds $task
+        //condition veri task sans user
+        //$task setUserAno
+        //en dehors fore faire $this->em flush envoyer en bdd
+//        return $this->render(
+//            'task/list.html.twig',
+//            [
+//                'tasks' => $tasks,
+//                'anonymous_tasks' => $anonymousTasks
+//            ]
+//
+//        );
     }
+
     /**
      * @throws OptimisticLockException
      * @throws ORMException
@@ -61,7 +74,7 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/create.html.twig', [
-            'form' => $form->createView()]
+                'form' => $form->createView()]
         );
     }
 
@@ -83,8 +96,8 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/edit.html.twig', [
-            'form' => $form->createView(),
-            'task' => $task,
+                'form' => $form->createView(),
+                'task' => $task,
             ]
         );
     }
@@ -107,13 +120,13 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, TaskRepository $taskRepository): Response
     {
-        $this->denyAccessUnlessGranted('DELETE_TASK', $task,
-            'vous n\'avez pas accès à la suppression de cette tâche');
+//        $this->denyAccessUnlessGranted('DELETE_TASK', $task,
+//            'vous n\'avez pas accès à la suppression de cette tâche');
         if ($task->getUser() !== null) {
             $this->getUser()->removeTask($task);
         }
-            $taskRepository->remove($task);
-            $this->addFlash('success', 'La tâche a bien été supprimée.');
-            return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+        $taskRepository->remove($task);
+        $this->addFlash('success', 'La tâche a bien été supprimée.');
+        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 }

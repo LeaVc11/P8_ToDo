@@ -35,13 +35,4 @@ class TaskRepository extends ServiceEntityRepository
             $this->_em->flush();
         }
     }
-
-    public function orderByStatus(): mixed
-    {
-        return $this->createQueryBuilder('t')
-            ->orderBy('t.isDone', 'ASC')
-            ->getQuery()
-            ->getResult()
-            ;
-    }
 }
