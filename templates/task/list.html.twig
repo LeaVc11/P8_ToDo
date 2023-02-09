@@ -4,13 +4,45 @@
                            alt="todo list">{% endblock %}
 
 {% block body %}
+    <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
+    <br>
+    <hr>
     <h2>Mes tâches</h2>
     <div class="row">
         {% for task in tasks %}
             {% if task.user == app.user %}
-        <div class="col-sm-4 col-lg-4 col-md-4 task">
-
-        </div>
+                <div class="col-sm-4 col-lg-4 col-md-4 ">
+                    <br>
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h4 class="pull-right">
+                                {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
+                                    <span class="glyphicon glyphicon-remove"></span>{% endif %}
+                            </h4>
+                            <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                            <span class="text-muted">{{ task.user }}</span>
+                            <p>{{ task.content }}</p>
+                        </div>
+                        <div>
+                            {% if task.user %}
+                                <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                                    <button class="btn btn-success btn-sm pull-right">
+                                        {% if not task.isDone %}
+                                            Marquer comme faite
+                                        {% else %}
+                                            Marquer non terminée
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            {% endif %}
+                            {% if is_granted('DELETE_TASK', task) %}
+                                <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
             {% endif %}
         {% else %}
             <div class="col-lg-12">
@@ -20,42 +52,52 @@
             </div>
         {% endfor %}
     </div>
-    <div class="row mb-2">
+    <hr>
+    <h2>Tâche Anonyme</h2>
+
+    <div class="row">
         {% for task in tasks %}
-            <div class="col-sm-4 col-lg-4 col-md-4 ">
-                <br>
-                <div class="thumbnail">
-                    <div class="caption">
-                        <h4 class="pull-right">
-                            {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
-                                <span class="glyphicon glyphicon-remove"></span>{% endif %}
-                        </h4>
-                        <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
-                        <span class="text-muted">{{ task.user }}</span>
-                        <p>{{ task.content }}</p>
-                    </div>
-                    <div>
-                        <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                            <button class="btn btn-success btn-sm pull-right">
-                                {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
-                            </button>
-                        </form>
-                        {% if is_granted('DELETE_TASK', task) %}
-                            <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
-                                <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer</button>
-                            </form>
-                        {% endif %}
+            {% if task.user == app.user %}
+                <div class="col-sm-4 col-lg-4 col-md-4 ">
+                    <br>
+                    <div class="thumbnail">
+                        <div class="caption">
+                            <h4 class="pull-right">
+                                {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
+                                    <span class="glyphicon glyphicon-remove"></span>{% endif %}
+                            </h4>
+                            <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                            <span class="text-muted">{{ task.user }}</span>
+                            <p>{{ task.content }}</p>
+                        </div>
+                        <div>
+                            {% if task.user %}
+                                <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                                    <button class="btn btn-success btn-sm pull-right">
+                                        {% if not task.isDone %}
+                                            Marquer comme faite
+                                        {% else %}
+                                            Marquer non terminée
+                                        {% endif %}
+                                    </button>
+                                </form>
+                            {% endif %}
+                            {% if is_granted('DELETE_TASK', task) %}
+                                <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
+                                    <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer</button>
+                                </form>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% else %}
-            <div class="alert alert-warning" role="alert">
-                Il n'y a pas encore de tâche enregistrée. <a href="{{ path('task_create') }}"
-                                                             class="btn btn-warning pull-right">Créer une tâche</a>
+            <div class="col-lg-12">
+                <div class="alert alert-warning" role="alert">
+                    <p>Il n'y a pas encore de tâche enregistrée.</p>
+                </div>
             </div>
         {% endfor %}
     </div>
-    <br>
 
-    <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
 {% endblock %}
