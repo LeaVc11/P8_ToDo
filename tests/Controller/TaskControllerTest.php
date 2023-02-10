@@ -82,9 +82,7 @@ class TaskControllerTest extends WebTestCase
         $client->loginUser($user);
         $task = $user->getTasks()->first();
 //        dd($task);
-        $crawler = $client->request('GET', '/tasks/' . $task->getId() . '/delete');
-//        $form = $crawler->selectButton('Supprimer')->form();
-//        $client->submit($form);
+        $client->request('GET', '/tasks/' . $task->getId() . '/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();
         $this->assertRouteSame('task_list');
