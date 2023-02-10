@@ -14,12 +14,12 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class TaskVoter extends Voter
 {
     public const DELETE = 'DELETE_TASK';
-    private Security $security;
+//    private Security $security;
 
-    public function __construct(Security $security)
-    {
-        $this->security = $security;
-    }
+//    public function __construct(Security $security)
+//    {
+//        $this->security = $security;
+//    }
 
     protected function supports(string $attribute, mixed $subject): bool
     {
