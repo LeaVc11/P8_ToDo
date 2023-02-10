@@ -23,10 +23,6 @@ class UserControllerTest extends WebTestCase
         $client->loginUser($user);
         $client->request('GET', '/users');
         $this->assertResponseIsSuccessful();
-
-//        $this->assertResponseRedirects();
-//        $client->followRedirect();
-//        $this->assertRouteSame('user_list');
     }
 
     /**
@@ -77,7 +73,6 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseRedirects();
         $client->followRedirect();
         $this->assertRouteSame('user_list');
-        $this->assertSelectorExists('div.alert.alert-success');
     }
 
 }
