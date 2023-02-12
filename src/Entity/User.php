@@ -46,56 +46,43 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->username;
     }
-
     public function getId(): ?int
     {
         return $this->id;
     }
-
     public function getUsername(): ?string
     {
         return $this->username;
     }
-
     public function setUsername(string $username): self
     {
         $this->username = $username;
-
         return $this;
     }
-
     public function getEmail(): ?string
     {
         return $this->email;
     }
-
     public function setEmail(string $email): self
     {
         $this->email = $email;
-
         return $this;
     }
-
     public function getUserIdentifier(): string
     {
         return (string) $this->username;
     }
-
     public function getRoles(): array
     {
         $roles = $this->roles;
         $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
     }
-
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
-
         return $this;
     }
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -107,26 +94,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
     public function eraseCredentials(): void
     {
     }
-
     public function getTasks(): Collection
     {
         return $this->tasks;
     }
-
     public function addTask(Task $task): self
     {
         if (!$this->tasks->contains($task)) {
             $this->tasks->add($task);
             $task->setUser($this);
         }
-
         return $this;
     }
-
     public function removeTask(Task $task): self
     {
         if ($this->tasks->removeElement($task)) {
@@ -134,7 +116,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $task->setUser(null);
             }
         }
-
         return $this;
     }
 }
