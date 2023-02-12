@@ -21,8 +21,6 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirect();
         $this->assertRouteSame('login');
     }
-
-//testCreateTask
     /**
      * @throws \Exception
      */
@@ -30,7 +28,6 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
         $client->loginUser($user);
         $crawler = $client->request(Request::METHOD_GET, '/tasks/create');
         $this->assertInstanceOf(Form::class,
@@ -43,7 +40,6 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirect();
         $this->assertRouteSame('task_list');
     }
-//testToggleTask
     /**
      * @throws \Exception
      */
@@ -51,7 +47,6 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//    dd($user);
         $client->loginUser($user);
         $task = $user->getTasks()->first();
         $client->request('GET', '/tasks/' . $task->getId() . '/edit');
@@ -69,8 +64,6 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-//testDeleteTask
-
     /**
      * @throws \Exception
      */
@@ -78,10 +71,8 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
         $client->loginUser($user);
         $task = $user->getTasks()->first();
-//        dd($task);
         $client->request('GET', '/tasks/' . $task->getId() . '/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();
@@ -96,7 +87,6 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
         $client->loginUser($user);
         $task = $user->getTasks()->first();
         $client->request(Request::METHOD_GET, '/tasks/'. $task->getId() .'/toggle');

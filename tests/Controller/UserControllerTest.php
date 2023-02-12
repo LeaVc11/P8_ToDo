@@ -10,7 +10,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 
 class UserControllerTest extends WebTestCase
-//WebTestCase => Permet d'écrire des tests avec des requêtes et les réponses
 {
 
     /**
@@ -32,11 +31,8 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-//        dd($user);
         $client->loginUser($user);
         $crawler = $client->request(Request::METHOD_GET, '/users/create');
-//         dd($client->getResponse());
-//        echo $client->getResponse()->getContent();
         $this->assertInstanceOf(Form::class,
             $crawler->selectButton('Ajouter')->form());
 

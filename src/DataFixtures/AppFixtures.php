@@ -30,9 +30,6 @@ class AppFixtures extends Fixture
             ->setRoles(['ROLE_ADMIN'])
             ->setPassword($this->passwordHasher->getPasswordHasher(User::class)->hash('admin'));
         $manager->persist($admin);
-//1-  //créer un usernamme anonyme
-        //role user
-
 
         $anonymousTask = (new Task())
             ->setTitle('Anonymous Task')

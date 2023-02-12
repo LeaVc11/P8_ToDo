@@ -19,11 +19,6 @@ class DefaultControllerTest extends WebTestCase
         $client->followRedirect();
         $this->assertRouteSame('login');
     }
-
-//    /**
-//     * @throws \Exception
-//     */
-//
     /**
      * @throws \Exception
      */
