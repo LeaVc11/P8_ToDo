@@ -35,19 +35,6 @@ class TaskController extends AbstractController
             'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['title' => 'ASC']),
             'anonymous_tasks' => $anonymousTasks
         ]);
-        //findOnby username pr user anony
-//foreach sur task ds $task
-        //condition veri task sans user
-        //$task setUserAno
-        //en dehors fore faire $this->em flush envoyer en bdd
-//        return $this->render(
-//            'task/list.html.twig',
-//            [
-//                'tasks' => $tasks,
-//                'anonymous_tasks' => $anonymousTasks
-//            ]
-//
-//        );
     }
 
     /**
