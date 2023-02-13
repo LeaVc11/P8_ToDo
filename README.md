@@ -30,12 +30,20 @@ Ces tests doivent être implémentés avec PHPUnit ; vous pouvez aussi utiliser 
 
 Vous prévoirez des données de tests afin de pouvoir prouver le fonctionnement dans les cas explicités dans ce document.
 
+Diagrammes UML
+Diagramme de cas d'utilsation
+Diagramme de séquence
+MPD
+
+Langage de programmation
+Le ToDo & Co a été développé en PHP via le framework Symfony 6.2
+
 Installation
-Clonez le repo :
+Etape 1 - Clonez le repo :
 git clone https://github.com/LeaVc11/P8_ToDo
 Modifier le .env avec vos informations.
 
-Installez les dépendances :
+2 - Installez les dépendances :
 
     composer install
 Mettre en place la BDD :
@@ -43,10 +51,17 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 
+Etape 3 : Lancer les fixture
+
+php bin/console --env=test doctrine:fixtures:load
 
 ## Default account credentials
 
 1. * Username: `user`
-* Password: `user`
+   * Password: `user`
 2. * Username: `admin`
-* Password: `admin`
+   * Password: `admin`
+
+Pour lancer les test unitaires :
+
+php vendor/bin/phpunit 
