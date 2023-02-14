@@ -21,12 +21,9 @@ class TaskController extends AbstractController
     {
 
     }
-
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
-
-
         $anonymousTasks = null;
         if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $anonymousTasks = $taskRepository->findBy(['user' => [null]], ['title' => 'ASC']);
@@ -107,8 +104,8 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     public function deleteTask(Task $task, TaskRepository $taskRepository): Response
     {
-//        $this->denyAccessUnlessGranted('DELETE_TASK', $task,
-//            'vous n\'avez pas accès à la suppression de cette tâche');
+        $this->denyAccessUnlessGranted('DELETE_TASK', $task,
+            'vous n\'avez pas accès à la suppression de cette tâche');
         if ($task->getUser() !== null) {
             $this->getUser()->removeTask($task);
         }
