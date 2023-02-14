@@ -10,13 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: TaskRepository::class)]
 class Task
 {
+
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-//    #[ORM\Column(options: ['default' => 'now'])]
-//    private ?DateTime $createdAt;
+    #[ORM\Column(options: ['default' => 'CURRENT_TIMESTAMP'])]
+    private ?DateTime $createdAt;
 
     #[ORM\Column(length: 255)]
     private ?string $title = null;
@@ -30,10 +32,27 @@ class Task
     #[ORM\ManyToOne(inversedBy: 'tasks')]
     private ?User $user = null;
 
-//    public function __construct()
-//    {
-//        $this->createdAt = new DateTime();
-//    }
+    public function __construct()
+    {
+        $this->createdAt = new DateTime();
+    }
+
+    /**
+     * @return DateTime|null
+     */
+    public function getCreatedAt(): ?DateTime
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * @param DateTime|null $createdAt
+     */
+    public function setCreatedAt(?DateTime $createdAt): void
+    {
+        $this->createdAt = $createdAt;
+    }
+
 
     public function getId(): ?int
     {
