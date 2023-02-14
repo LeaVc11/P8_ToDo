@@ -18,27 +18,27 @@ class TaskTest extends KernelTestCase
         $task->setTitle('Task title')
             ->setContent('Task content')
             ->setUser(null)
-//            ->setCreatedAt($date)
+            ->setCreatedAt($date)
         ;
 
         $this->assertEquals('Task title', $task->getTitle());
         $this->assertEquals('Task content', $task->getContent());
         $this->assertEquals(null, $task->getUser());
-//        $this->assertEquals($date, $task->getCreatedAt());
+        $this->assertEquals($date, $task->getCreatedAt());
     }
-//    public function testGetCreatedAt(): void
-//    {
-//        $task = new Task();
-//        $this->assertInstanceOf(DateTime::class, $task->getCreatedAt());
-//    }
+    public function testGetCreatedAt(): void
+    {
+        $task = new Task();
+        $this->assertInstanceOf(DateTime::class, $task->getCreatedAt());
+    }
 
-//    public function testSetCreatedAt(): void
-//    {
-//        $task = new Task();
-//        $createdAt = new DateTime();
-//        $task->setCreatedAt($createdAt);
-//        $this->assertSame($createdAt, $task->getCreatedAt());
-//    }
+    public function testSetCreatedAt(): void
+    {
+        $task = new Task();
+        $createdAt = new DateTime();
+        $task->setCreatedAt($createdAt);
+        $this->assertSame($createdAt, $task->getCreatedAt());
+    }
 
     public function testGetTitle(): void
     {
