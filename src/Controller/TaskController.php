@@ -24,12 +24,15 @@ class TaskController extends AbstractController
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
+        $tasks = $taskRepository->findBy(['user' => $this->getUser()], ['title' => 'ASC']);
         $anonymousTasks = null;
         if (in_array('ROLE_ADMIN', $this->getUser()->getRoles())) {
             $anonymousTasks = $taskRepository->findBy(['user' => [null]], ['title' => 'ASC']);
+            $tasks = $taskRepository->findAll();
         }
+//        dd($tasks);
         return $this->render('task/list.html.twig', [
-            'tasks' => $taskRepository->findBy(['user' => $this->getUser()], ['title' => 'ASC']),
+            'tasks' => $tasks,
             'anonymous_tasks' => $anonymousTasks
         ]);
     }
