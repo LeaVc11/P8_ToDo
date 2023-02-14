@@ -43,7 +43,7 @@ Etape 1 - Clonez le repo :
 git clone https://github.com/LeaVc11/P8_ToDo
 Modifier le .env avec vos informations.
 
-2 - Installez les dépendances :
+Etape 2 - Installez les dépendances :
 
     composer install
 Mettre en place la BDD :
