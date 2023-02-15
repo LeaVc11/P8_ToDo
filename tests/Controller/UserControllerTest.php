@@ -40,11 +40,11 @@ class UserControllerTest extends WebTestCase
             'user[username]' => 'user2',
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
-            'user[email]' => 'user2@gmail.com',
+            'user[email]' => 'user@gmail.com',
         ]);
         $this->assertResponseRedirects();
         $client->followRedirect();
-        $this->assertRouteSame('user_list');
+        $this->assertRouteSame('homepage');
     }
 
     /**
@@ -64,7 +64,7 @@ class UserControllerTest extends WebTestCase
             'user[username]' => 'user4',
             'user[password][first]' => 'password',
             'user[password][second]' => 'password',
-            'user[email]' => 'user1@gmail.com',
+            'user[email]' => 'user@gmail.com',
         ]);
         $this->assertResponseRedirects();
         $client->followRedirect();

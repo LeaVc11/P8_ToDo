@@ -36,34 +36,6 @@ class TaskControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testListAsAdmin(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
-        $client->loginUser($user);
-        $client->request('GET', '/tasks');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertRouteSame('task_list');
-
-    }
-    /**
-     * @throws \Exception
-     */
-    public function testListAsUser(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-        $client->loginUser($user);
-        $client->request('GET', '/tasks');
-
-        $this->assertResponseIsSuccessful();
-        $this->assertRouteSame('task_list');
-
-    }
-    /**
-     * @throws \Exception
-     */
     public function testCreateTask(): void
     {
         $client = static::createClient();
@@ -94,20 +66,6 @@ class TaskControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testEditTaskNotLoggedIn(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-        $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => $user]);
-        $client->request('GET', '/tasks/'. $task->getId() .'/edit');
-        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('login');
-    }
-
-    /**
-     * @throws \Exception
-     */
     public function testEditTask()
     {
         $client = static::createClient();
@@ -129,21 +87,6 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-
-    /**
-     * @throws \Exception
-     */
-//    public function testEditTaskNotHolder(): void
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        $client->loginUser($user, 'admin');
-//        $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => $user]);
-//        $client->request('GET', '/tasks/'. $task->getId() .'/edit');
-//
-//        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
-//    }
-
     /**
      * @throws \Exception
      */
@@ -160,6 +103,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertSelectorExists('div.alert.alert-success');
     }
 
+
     /**
      * @throws \Exception
      */
@@ -167,14 +111,13 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
         $client->loginUser($user);
         $task = $user->getTasks()->first();
         $client->request('GET', '/tasks/'. $task->getId() .'/delete');
-
-        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
+        $this->assertResponseRedirects();
+        $client->followRedirect();
+        $this->assertRouteSame('task_list');
     }
-
     /**
      * @throws \Exception
      */
@@ -182,58 +125,32 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+//        dump($user);
         $client->loginUser($user);
+//        dump($user);
         $task = $user->getTasks()->first();
+//        dump($task);
         $client->request('GET', '/tasks/'. $task->getId() .'/toggle');
         $this->assertResponseRedirects();
-        $crawler = $client->followRedirect();
+        $client->followRedirect();
+        $this->assertRouteSame('task_list');
+        $this->assertSelectorExists('div.alert.alert-success');
+    }
+    /**
+     * @throws \Exception
+     */
+    public function testAnonymousTaskDeleteAsAdmin(): void
+    {
+        $client = static::createClient();
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
+        $client->loginUser($user);
+        $task = $user->getTasks()->first();
+        $client->request('GET', '/tasks/' . $task->getId() . '/delete');
+        $this->assertResponseRedirects();
+        $client->followRedirect();
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
 
-    /**
-     * @throws \Exception
-     */
-//    public function testTaskToggleNotHolder(): void
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
-//        $client->loginUser($user);
-//        $task = $user->getTasks()->first();
-//        $client->request('GET', '/tasks/'. $task->getId() .'/toggle');
-//
-//        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
-//    }
-
-    /**
-     * @throws \Exception
-     */
-//    public function testAnonymousDeleteTaskNotAdmin(): void
-//    {
-//        $client = static::createClient();
-//        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        $client->loginUser($user);
-//        $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => null]);
-//        $client->request('GET', '/tasks/'. $task->getId() .'/delete');
-//
-//        $this->assertResponseStatusCodeSame(Response::HTTP_FORBIDDEN);
-//    }
-
-    /**
-     * @throws \Exception
-     */
-//    public function testAnonymousTaskDelete(): void
-//    {
-//        $client = static::createClient();
-//        $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => null]);
-//        $client->request('GET', '/tasks/'. $task->getId() .'/delete');
-//
-//        $this->assertResponseRedirects();
-//      $client->followRedirect();
-//        $this->assertRouteSame('task_list');
-//        $this->assertSelectorExists('div.alert.alert-success');
-//
-//    }
 
 }

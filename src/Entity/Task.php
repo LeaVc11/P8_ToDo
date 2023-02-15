@@ -38,6 +38,22 @@ class Task
     }
 
     /**
+     * @return bool|null
+     */
+    public function getIsDone(): ?bool
+    {
+        return $this->isDone;
+    }
+
+    /**
+     * @param bool|null $isDone
+     */
+    public function setIsDone(?bool $isDone): void
+    {
+        $this->isDone = $isDone;
+    }
+
+    /**
      * @return DateTime|null
      */
     public function getCreatedAt(): ?DateTime
@@ -59,16 +75,6 @@ class Task
         return $this->id;
     }
 
-//    public function getCreatedAt(): ?\DateTime
-//    {
-//        return $this->createdAt;
-//    }
-//
-//    public function setCreatedAt(\DateTime $createdAt): self
-//    {
-//        $this->createdAt = $createdAt;
-//
-//        return $this;
 //    }
     public function getTitle(): ?string
     {

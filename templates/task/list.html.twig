@@ -7,41 +7,46 @@
     <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
     <br>
     <hr>
-    <h2>Mes tâches </h2>
+    <h2>Les tâches </h2>
     <div class="row">
         {% for task in tasks %}
-            {% if task.user %}
-                <div class="col-sm-4 col-lg-4 col-md-4 ">
-                    <br>
-                    <div class="thumbnail">
-                        <div class="caption">
-                            <h4 class="pull-right">
-                                {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
-                                    <span class="glyphicon glyphicon-remove"></span>{% endif %}
-                            </h4>
-                            <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
-                            <span class="text-muted">{{ task.user }}</span>
-                            <p>{{ task.content }}</p>
-                        </div>
-                        <div>
-                            {% if task.user %}
-                                <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                                    <button class="btn btn-success btn-sm pull-right">
-                                        {% if not task.isDone %}
-                                            Marquer comme faite
-                                        {% else %}
-                                            Marquer non terminée
-                                        {% endif %}
-                                    </button>
-                                </form>
-                            {% endif %}
+            <div class="col-sm-4 col-lg-4 col-md-4 ">
+                <br>
+                <div class="thumbnail">
+                    <div class="caption">
+                        <h4 class="pull-right">
+                            {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
+                                <span class="glyphicon glyphicon-remove"></span>{% endif %}
+                        </h4>
+                        <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                        <span class="text-muted">{{ task.user }}</span>
+                        <p>{{ task.content }}</p>
+                    </div>
+                    <div>
+                        <form action="{{ path('task_toggle', {'id' : task.id }) }}">
+                            <button class="btn btn-success btn-sm pull-right">
+                                {% if not task.isDone %}
+                                    Marquer comme faite
+                                {% else %}
+                                    Marquer non terminée
+                                {% endif %}
+                            </button>
+                        </form>
+                        {% if task.user != null %}
+                            {% if task.user.id == app.user.id or is_granted('ROLE_ADMIN') %}
                                 <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
                                     <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer</button>
                                 </form>
-                        </div>
+                            {% endif %}
+                        {% elseif is_granted('ROLE_ADMIN') %}
+                            <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
+                                <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer</button>
+                            </form>
+                        {% endif %}
                     </div>
                 </div>
-            {% endif %}
+            </div>
+
         {% else %}
             <div class="col-lg-12">
                 <div class="alert alert-info" role="alert">
@@ -51,55 +56,6 @@
         {% endfor %}
     </div>
 
-    {% if is_granted('ROLE_ADMIN') %}
-        <hr>
-        <h2>Tâche Anonyme</h2>
-        <div class="row">
-            {% for task in anonymous_tasks %}
-                {% if not task.user %}
-                    <div class="col-sm-4 col-lg-4 col-md-4 ">
-                        <br>
-                        <div class="thumbnail">
-                            <div class="caption">
-                                <h4 class="pull-right">
-                                    {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
-                                        <span class="glyphicon glyphicon-remove"></span>{% endif %}
-                                </h4>
-                                <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
-                                <span class="text-muted">{{ task.user }}</span>
-                                <p>{{ task.content }}</p>
-                            </div>
-                            <div>
-                                {% if task.user %}
-                                    <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                                        <button class="btn btn-success btn-sm pull-right">
-                                            {% if not task.isDone %}
-                                                Marquer comme faite
-                                            {% else %}
-                                                Marquer non terminée
-                                            {% endif %}
-                                        </button>
-                                    </form>
-                                {% endif %}
-                                {% if is_granted('DELETE_TASK', task) %}
-                                    <form method="post" action="{{ path('task_delete', {'id' : task.id }) }}">
-                                        <button type="submit" class="btn btn-danger btn-sm pull-right">Supprimer
-                                        </button>
-                                    </form>
-                                {% endif %}
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-            {% else %}
-                <div class="col-lg-12">
-                    <div class="alert alert-info" role="alert">
-                        <p>Il n'y a pas encore de tâche enregistrée.</p>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    {% endif %}
-
+    <a href="{{ path('homepage') }}" class="btn btn-primary">Retour</a>
 
 {% endblock %}
