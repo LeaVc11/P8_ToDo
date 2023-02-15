@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1676474810">
-  <project timestamp="1676474810">
+<coverage generated="1676477854">
+  <project timestamp="1676477854">
     <file name="C:\laragon\www\P8_ToDo\src\Controller\DefaultController.php">
       <class name="App\Controller\DefaultController" namespace="global">
         <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
@@ -28,7 +28,7 @@
     </file>
     <file name="C:\laragon\www\P8_ToDo\src\Controller\TaskController.php">
       <class name="App\Controller\TaskController" namespace="global">
-        <metrics complexity="12" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="43" elements="55" coveredelements="49"/>
+        <metrics complexity="12" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="43" elements="54" coveredelements="49"/>
       </class>
       <line num="20" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="23" type="stmt" count="6"/>
@@ -40,7 +40,6 @@
       <line num="35" type="stmt" count="3"/>
       <line num="37" type="method" name="listEnd" visibility="public" complexity="1" crap="2" count="0"/>
       <line num="41" type="stmt" count="0"/>
-      <line num="42" type="stmt" count="0"/>
       <line num="45" type="stmt" count="0"/>
       <line num="46" type="stmt" count="0"/>
       <line num="47" type="stmt" count="0"/>
@@ -85,7 +84,7 @@
       <line num="125" type="stmt" count="3"/>
       <line num="126" type="stmt" count="3"/>
       <line num="127" type="stmt" count="3"/>
-      <metrics loc="129" ncloc="119" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="48" coveredstatements="43" elements="55" coveredelements="49"/>
+      <metrics loc="129" ncloc="118" classes="1" methods="7" coveredmethods="6" conditionals="0" coveredconditionals="0" statements="47" coveredstatements="43" elements="54" coveredelements="49"/>
     </file>
     <file name="C:\laragon\www\P8_ToDo\src\Controller\UserController.php">
       <class name="App\Controller\UserController" namespace="global">
@@ -285,35 +284,23 @@
     </file>
     <file name="C:\laragon\www\P8_ToDo\src\Repository\TaskRepository.php">
       <class name="App\Repository\TaskRepository" namespace="global">
-        <metrics complexity="5" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="4" elements="10" coveredelements="6"/>
+        <metrics complexity="3" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
       </class>
       <line num="18" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="6"/>
       <line num="20" type="stmt" count="6"/>
-      <line num="23" type="method" name="add" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="25" type="stmt" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="27" type="stmt" count="0"/>
       <line num="31" type="method" name="remove" visibility="public" complexity="2" crap="2" count="3"/>
       <line num="33" type="stmt" count="3"/>
       <line num="34" type="stmt" count="3"/>
       <line num="35" type="stmt" count="3"/>
-      <metrics loc="38" ncloc="32" classes="1" methods="3" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="4" elements="10" coveredelements="6"/>
+      <metrics loc="38" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="4" elements="6" coveredelements="6"/>
     </file>
     <file name="C:\laragon\www\P8_ToDo\src\Repository\UserRepository.php">
       <class name="App\Repository\UserRepository" namespace="global">
-        <metrics complexity="5" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="1" elements="10" coveredelements="2"/>
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
       </class>
       <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="12"/>
       <line num="21" type="stmt" count="12"/>
-      <line num="24" type="method" name="save" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="26" type="stmt" count="0"/>
-      <line num="28" type="stmt" count="0"/>
-      <line num="29" type="stmt" count="0"/>
-      <line num="33" type="method" name="remove" visibility="public" complexity="2" crap="6" count="0"/>
-      <line num="35" type="stmt" count="0"/>
-      <line num="37" type="stmt" count="0"/>
-      <line num="38" type="stmt" count="0"/>
-      <metrics loc="43" ncloc="35" classes="1" methods="3" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="1" elements="10" coveredelements="2"/>
+      <metrics loc="43" ncloc="19" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="1" elements="2" coveredelements="2"/>
     </file>
     <file name="C:\laragon\www\P8_ToDo\src\Security\Voter\TaskVoter.php">
       <class name="App\Security\Voter\TaskVoter" namespace="global">
@@ -321,6 +308,6 @@
       </class>
       <metrics loc="57" ncloc="53" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
     </file>
-    <metrics files="11" loc="753" ncloc="706" classes="10" methods="54" coveredmethods="44" conditionals="0" coveredconditionals="0" statements="200" coveredstatements="180" elements="254" coveredelements="224"/>
+    <metrics files="11" loc="753" ncloc="682" classes="10" methods="51" coveredmethods="44" conditionals="0" coveredconditionals="0" statements="190" coveredstatements="180" elements="241" coveredelements="224"/>
   </project>
 </coverage>
