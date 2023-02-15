@@ -39,7 +39,7 @@ class TaskController extends AbstractController
     {
 
         $tasks = $taskRepository->findBy(['isDone' => true]);
-        dump($tasks);
+//        dump($tasks);
 
 //        dd($tasks);
         return $this->render('task/list.html.twig', [
@@ -124,6 +124,6 @@ class TaskController extends AbstractController
         }
         $taskRepository->remove($task);
         $this->addFlash('success', 'La tâche a bien été supprimée.');
-        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
     }
 }

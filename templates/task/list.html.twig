@@ -4,10 +4,11 @@
                            alt="todo list">{% endblock %}
 
 {% block body %}
+
     <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
     <br>
     <hr>
-    <h2>Les tâches </h2>
+    <h2>Les tâches</h2>
     <div class="row">
         {% for task in tasks %}
             <div class="col-sm-4 col-lg-4 col-md-4 ">
