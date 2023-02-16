@@ -99,7 +99,7 @@ class TaskControllerTest extends WebTestCase
         $client->request('GET', '/tasks/' . $task->getId() . '/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();
-        $this->assertRouteSame('homepage');
+        $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
 
@@ -116,7 +116,7 @@ class TaskControllerTest extends WebTestCase
         $client->request('GET', '/tasks/'. $task->getId() .'/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();
-        $this->assertRouteSame('homepage');
+        $this->assertRouteSame('task_list');
     }
     /**
      * @throws \Exception
@@ -149,7 +149,7 @@ class TaskControllerTest extends WebTestCase
         $client->request('GET', '/tasks/' . $task->getId() . '/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();
-        $this->assertRouteSame('homepage');
+        $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
 

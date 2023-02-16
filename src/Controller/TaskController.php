@@ -21,15 +21,10 @@ class TaskController extends AbstractController
     {
 
     }
-
     #[Route('/tasks', name: 'task_list', methods: ['GET'])]
     public function list(TaskRepository $taskRepository): Response
     {
-
         $tasks = $taskRepository->findBy(['isDone' => false]);
-        dump($tasks);
-
-//        dd($tasks);
         return $this->render('task/list.html.twig', [
             'tasks' => $tasks
         ]);
@@ -37,16 +32,11 @@ class TaskController extends AbstractController
     #[Route('/tasks/end', name: 'task_list_end', methods: ['GET'])]
     public function listEnd(TaskRepository $taskRepository): Response
     {
-
         $tasks = $taskRepository->findBy(['isDone' => true]);
-//        dump($tasks);
-
-//        dd($tasks);
         return $this->render('task/list.html.twig', [
             'tasks' => $tasks
         ]);
     }
-
     /**
      * @throws OptimisticLockException
      * @throws ORMException
@@ -56,57 +46,43 @@ class TaskController extends AbstractController
     {
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $task->setUser($this->getUser());
             $task = $form->getData();
             $this->entityManager->persist($task);
             $this->entityManager->flush();
-
             $this->addFlash('success', sprintf('La tâche %s a été bien été ajoutée.', $task->getTitle()));
-
             return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('task/create.html.twig', [
                 'form' => $form->createView()]
         );
     }
-
-
     #[Route('/tasks/{id}/edit', name: 'task_edit', methods: ['GET', 'POST'])]
     public function edit(Task $task, Request $request): Response
     {
         $form = $this->createForm(TaskType::class, $task);
-
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $task = $form->getData();
             $this->entityManager->persist($task);
             $this->entityManager->flush();
             $this->addFlash('success', 'La tâche a bien été modifiée.');
-
             return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
         }
-
         return $this->render('task/edit.html.twig', [
                 'form' => $form->createView(),
                 'task' => $task,
             ]
         );
     }
-
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     public function toggleTask(Task $task): Response
     {
         $task->toggle(!$task->isDone());
         $this->entityManager->flush();
-
         $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-
         return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 
@@ -124,6 +100,6 @@ class TaskController extends AbstractController
         }
         $taskRepository->remove($task);
         $this->addFlash('success', 'La tâche a bien été supprimée.');
-        return $this->redirectToRoute('homepage', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('task_list', [], Response::HTTP_SEE_OTHER);
     }
 }

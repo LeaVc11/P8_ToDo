@@ -28,7 +28,7 @@ class UserController extends AbstractController
             ]
         );
     }
-    #[Route('/users/create', name: 'user_create')]
+    #[Route('/users/create', name: 'user_create', methods: [Request::METHOD_GET, Request::METHOD_POST])]
     public function create(
         Request $request,
         EntityManagerInterface $entityManager,
