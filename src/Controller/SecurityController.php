@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     #[Route('/login_check', name: 'login_check')]
     public function loginCheck()
     {
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        // This code is never executed.
     }
 
     /**

@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultControllerTest extends WebTestCase
 {
-    //testIndexNotConnected => OK
     public function testIndexNotConnected()
     {
 

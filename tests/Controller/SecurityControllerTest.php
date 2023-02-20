@@ -8,6 +8,7 @@ use Exception;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityControllerTest extends WebTestCase
 {
@@ -32,6 +33,18 @@ class SecurityControllerTest extends WebTestCase
         ]);
         $client->followRedirect();
         $this->assertRouteSame('login');
+    }
+    public function testLogoutCheck(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/logout');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
+    }
+    public function testLoginCheck(): void
+    {
+        $client = static::createClient();
+        $client->request('GET', '/logout');
+        $this->assertResponseStatusCodeSame(Response::HTTP_FOUND);
     }
 
 

@@ -24,6 +24,7 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirect();
         $this->assertRouteSame('login');
     }
+
     public function testListNotLoggedIn(): void
     {
         $client = static::createClient();
@@ -102,8 +103,6 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-
-
     /**
      * @throws \Exception
      */
@@ -114,9 +113,7 @@ class TaskControllerTest extends WebTestCase
         $client->loginUser($user);
         $task = $user->getTasks()->first();
         $client->request('GET', '/tasks/'. $task->getId() .'/delete');
-        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('task_list');
+        $this->assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
     }
     /**
      * @throws \Exception

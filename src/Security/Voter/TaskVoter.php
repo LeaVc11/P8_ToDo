@@ -15,33 +15,26 @@ class TaskVoter extends Voter
 {
     public const DELETE = 'DELETE_TASK';
     private Security $security;
-
     public function __construct(Security $security)
     {
         $this->security = $security;
     }
-
     protected function supports(string $attribute, mixed $subject): bool
     {
         return $attribute == self::DELETE
             && $subject instanceof Task;
     }
-
     protected function voteOnAttribute(string $attribute, mixed $subject, TokenInterface $token): bool
     {
         $user = $token->getUser();
-        // if the user is anonymous, do not grant access
         if (!$user instanceof UserInterface) {
             return false;
         }
         if($attribute == self::DELETE){
             return $this->deleteTask($user, $subject);
         }
-
         return false;
-
     }
-
     private function deleteTask(UserInterface $user, mixed $subject): bool
     {
         if ($user == $subject->getUser()) {
