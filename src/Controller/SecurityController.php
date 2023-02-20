@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     #[Route('/login_check', name: 'login_check')]
     public function loginCheck()
     {
-        // This code is never executed.
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 
     /**
@@ -38,6 +38,6 @@ class SecurityController extends AbstractController
     #[Route('/logout', name: 'logout')]
     public function logoutCheck()
     {
-        throw new \Exception('Don\'t forget to activate logout in security.yaml');
+        throw new \LogicException('This method can be blank - it will be intercepted by the logout key on your firewall.');
     }
 }
