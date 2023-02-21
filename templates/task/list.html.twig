@@ -5,11 +5,11 @@
 
 {% block body %}
 
-    <a href="{{ path('task_create') }}" class="btn btn-info pull-right m-3">Créer une tâche</a>
+    <a href="{{ path('task_create') }}" class="btn btn-info text-white fw-bold pull-right m-3">Créer une tâche</a>
     <br>
     <hr>
-    <h2>Les tâches</h2>
-    <div class="row">
+    <h2 class="text-center ">Les tâches</h2>
+    <div class="row justify-content-center">
         {% for task in tasks %}
             <div class="card col-sm-4 shadow-lg p-5 m-2 border-0 text-center">
                 <div class="thumbnail">
@@ -58,6 +58,6 @@
         {% endfor %}
     </div>
 
-    <a href="{{ path('homepage') }}" class="btn btn-primary">Retour</a>
+    <a href="{{ path('homepage') }}" class="btn btn-primary fw-bold">Retour</a>
 
 {% endblock %}

@@ -38,12 +38,12 @@
         </button>
         <div class="collapse navbar-collapse justify-content-end p-3" id="navbarNav">
             {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('user_list') }}" class="btn btn-primary ">Liste des utilisateurs</a>
+                <a href="{{ path('user_list') }}" class="btn btn-primary fw-bold ">Liste des utilisateurs</a>
             {% endif %}
-            <a href="{{ path('user_create') }}" class="btn btn-primary m-2">Créer un utilisateur</a>
+            <a href="{{ path('user_create') }}" class="btn btn-primary fw-bold m-2">Créer un utilisateur</a>
             <div class="navbar-item-custom text-end">
                 {% if app.user %}
-                    <a href="{{ path('logout') }}" class=" btn btn-danger" role="button">Déconnexion</a>
+                    <a href="{{ path('logout') }}" class=" btn btn-danger fw-bold" role="button">Déconnexion</a>
                 {% endif %}
             </div>
         </div>
@@ -51,15 +51,17 @@
 </nav>
 
 <!-- Page Content -->
-<div class="container ">
-    <div class="row m-5">
-        <div class="col-2">
-            {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
-            {% endif %}
-        </div>
-    </div>
-    <div class="row">
+<div class="container mt-5">
+{#    <div class="row m-5">#}
+{#        <div class="col-2">#}
+{#            {% if not app.user and 'login' != app.request.attributes.get('_route') %}#}
+{#                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>#}
+{#            {% endif %}#}
+{#        </div>#}
+{#    </div>#}
+    <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms"/>
+    <h1 class="title text-center" >To Do </h1>
+    <div class="row mt-3">
         <div class="col-md-12">
             {% for flash_message in app.session.flashBag.get('success') %}
                 <div class="alert alert-success" role="alert">
