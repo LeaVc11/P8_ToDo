@@ -11,11 +11,11 @@
 
     <title>To Do List app</title>
 
-    <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="{{ asset('css/shop-homepage.css') }}" rel="stylesheet">
+    <link href="{{ asset('assets/css/shop-homepage.css') }}" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,33 +26,39 @@
 </head>
 
 <body>
-<nav class="navbar navbar-light navbar-fixed-top" style="background-color: #e3f2fd;" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
 
-            <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms"/>
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+
+    <div class="container-fluid">
+        <img src="{{ asset('img/Logo_OpenClassrooms.png') }}" alt="OpenClassrooms"/>
+        <a class="navbar-brand" href="{{ path('homepage') }}">To Do List app</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end p-3" id="navbarNav">
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('user_list') }}" class="btn btn-primary ">Liste des utilisateurs</a>
+            {% endif %}
+            <a href="{{ path('user_create') }}" class="btn btn-primary m-2">Créer un utilisateur</a>
+            <div class="navbar-item-custom text-end">
+                {% if app.user %}
+                    <a href="{{ path('logout') }}" class=" btn btn-danger" role="button">Déconnexion</a>
+                {% endif %}
+            </div>
         </div>
     </div>
 </nav>
 
 <!-- Page Content -->
-<div class="container">
-    <div class="row">
-
-        {% if is_granted('ROLE_ADMIN') %}
-            <a href="{{ path('user_list') }}" class="btn btn-primary">Liste des utilisateurs</a>
-        {% endif %}
-        <a href="{{ path('user_create') }}" class="btn btn-primary">Créer un utilisateur</a>
-        {% if app.user %}
-            <a href="{{ path('logout') }}" class="pull-right btn btn-danger">Se déconnecter</a>
-        {% endif %}
-        {% if not app.user and 'login' != app.request.attributes.get('_route') %}
-            <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
-        {% endif %}
-
+<div class="container ">
+    <div class="row m-5">
+        <div class="col-2">
+            {% if not app.user and 'login' != app.request.attributes.get('_route') %}
+                <a href="{{ path('login') }}" class="btn btn-success">Se connecter</a>
+            {% endif %}
+        </div>
     </div>
-
     <div class="row">
         <div class="col-md-12">
             {% for flash_message in app.session.flashBag.get('success') %}
@@ -96,7 +102,8 @@
 
 </div>
 
-<script src="{{ asset('js/jquery.js') }}"></script>
-<script src="{{ asset('js/bootstrap.min.js') }}"></script>
+
+<script src="{{ asset('assets/js/bootstrap.bundle.js') }}"></script>
+
 </body>
 </html>

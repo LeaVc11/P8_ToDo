@@ -11,14 +11,26 @@
     {% if error %}
         <div class="alert alert-danger" role="alert">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
-    <h1>Connexion</h1>
-    <form name="login" action="{{ path('login_check') }}" method="post">
-        <label for="username">Nom d'utilisateur :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}"/>
 
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password"/>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button class="btn btn-success" type="submit">Se connecter</button>
+    <form name="login" action="{{ path('login_check') }}" method="post">
+        <section class="d-flex justify-content-center align-content-center w-100 h-100 col-md">
+            <div class="m-5 rounded-3 bg-dark ">
+                <div class="login px-5 py-2">
+                    <h1 class="text-secondary text-center m-2">S'identifier</h1>
+                    <label for="inputEmail" class="fw-bold mb-2">Nom d'utilisateur</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}"
+                           class="form-control mb-2">
+                    <label for="password" class="fw-bold mb-2">Mot de passe :</label>
+                    <input type="password" id="password" name="_password" class="form-control mb-2"/>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <div class="form-groupe m-2 px-5 ">
+                        <button class="btn btn-danger m-1 w-100 rounded-1 form-control form-control-lg"
+                                type="submit">Se connecter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
     </form>
+
 {% endblock %}

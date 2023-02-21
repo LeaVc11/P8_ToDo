@@ -11,19 +11,18 @@
     <h2>Les tâches</h2>
     <div class="row">
         {% for task in tasks %}
-            <div class="col-sm-4 col-lg-4 col-md-4 ">
-                <br>
+            <div class="card col-sm-4 shadow-lg p-5 m-2 border-0 text-center">
                 <div class="thumbnail">
-                    <div class="caption">
-                        <h4 class="pull-right">
+                    <div>
+                        <h4>
                             {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
                                 <span class="glyphicon glyphicon-remove"></span>{% endif %}
                         </h4>
-                        <h4><a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
+                        <h4><a class="text-decoration-none" href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a></h4>
                         <span class="text-muted">{{ task.user }}</span>
                         <p>{{ task.content }}</p>
                     </div>
-                    <div>
+                    <div class="btn-group text-center">
                         <form action="{{ path('task_toggle', {'id' : task.id }) }}">
                             <button class="btn btn-success btn-sm pull-right">
                                 {% if not task.isDone %}

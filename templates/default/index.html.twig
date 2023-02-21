@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block body %}
-    <a href="{{ path('task_create') }}" class="btn btn-success" role="button">Créer une nouvelle tâche</a>
+    <a href="{{ path('task_create') }}" class="btn btn-success fw-bold  text-white" role="button">Créer une nouvelle tâche</a>
 
-    <a href="{{ path('task_list') }}" class="btn btn-info">Consulter la liste des tâches à faire</a>
-    <a href="{{ path('task_list_end') }}" class="btn btn-primary">Consulter la liste des tâches terminées</a>
+    <a href="{{ path('task_list') }}" class="btn btn-info fw-bold text-white">Consulter la liste des tâches à faire</a>
+    <a href="{{ path('task_list_end') }}" class="btn btn-secondary fw-bold text-white">Consulter la liste des tâches terminées</a>
 {% endblock %}
