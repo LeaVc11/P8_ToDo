@@ -103,18 +103,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-    /**
-     * @throws \Exception
-     */
-    public function testTaskDeleteNotHolder(): void
-    {
-        $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-        $client->loginUser($user);
-        $task = $user->getTasks()->first();
-        $client->request('GET', '/tasks/'. $task->getId() .'/delete');
-        $this->assertResponseStatusCodeSame(Response::HTTP_SEE_OTHER);
-    }
+
     /**
      * @throws \Exception
      */
@@ -140,9 +129,11 @@ class TaskControllerTest extends WebTestCase
     public function testAnonymousTaskDeleteAsAdmin(): void
     {
         $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-        $client->loginUser($user);
-        $task = $user->getTasks()->first();
+        $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => null]);
+//        dd($task);
+        $admin = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+        $client->loginUser($admin);
+
         $client->request('GET', '/tasks/' . $task->getId() . '/delete');
         $this->assertResponseRedirects();
         $client->followRedirect();

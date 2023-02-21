@@ -6,16 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a9ec9b86-9b5f-4cd9-990b-926aeb4f0fe1" name="Changes" comment="update readme.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/assets/css/shop-homepage.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/assets/css/shop-homepage.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/logoDelete.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/img/logoEdit.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/default/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/default/index.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/task/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/task/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/task/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/task/list.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/create.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/create.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/edit.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/user/list.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/user/list.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/coverage.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -268,7 +262,7 @@
       <workItem from="1676647195149" duration="730000" />
       <workItem from="1676647956212" duration="373000" />
       <workItem from="1676912378314" duration="980000" />
-      <workItem from="1676965625018" duration="20370000" />
+      <workItem from="1676965625018" duration="23257000" />
     </task>
     <task id="LOCAL-00001" summary="update covrage css">
       <created>1676292968724</created>
