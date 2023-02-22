@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testUserNotConnected()
+    public function testHomepageNotLoggedIn()
     {
 
         $client = static::createClient();
@@ -21,12 +21,10 @@ class DefaultControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testUserConnected(): void
+    public function testHomepageLoggedIn(): void
     {
         $client = static::createClient();
-
         $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
-//        dd($user);
         $client->loginUser($user);
         $client->request('GET', '/');
         $this->assertResponseIsSuccessful();
