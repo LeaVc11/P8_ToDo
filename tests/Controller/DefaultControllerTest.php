@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultControllerTest extends WebTestCase
 {
-    public function testIndexNotConnected()
+    public function testUserNotConnected()
     {
 
         $client = static::createClient();
@@ -21,7 +21,7 @@ class DefaultControllerTest extends WebTestCase
     /**
      * @throws \Exception
      */
-    public function testIndexConnected(): void
+    public function testUserConnected(): void
     {
         $client = static::createClient();
 
