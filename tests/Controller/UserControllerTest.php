@@ -30,7 +30,7 @@ class UserControllerTest extends WebTestCase
     public function testCreateUser(): void
     {
         $client = static::createClient();
-        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
+        $user = static::getContainer()->get(UserRepository::class)->findOneByUsername('user');
         $client->loginUser($user);
         $crawler = $client->request(Request::METHOD_GET, '/users/create');
         $this->assertInstanceOf(Form::class,

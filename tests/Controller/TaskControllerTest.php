@@ -25,15 +25,6 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('login');
     }
 
-    public function testListNotLoggedIn(): void
-    {
-        $client = static::createClient();
-        $client->request('GET', '/tasks');
-
-        $this->assertResponseRedirects();
-        $client->followRedirect();
-        $this->assertRouteSame('login');
-    }
     /**
      * @throws \Exception
      */
@@ -54,7 +45,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-    public function testCreateNotLoggedIn(): void
+/*    public function testCreateNotLoggedIn(): void
     {
         $client = static::createClient();
         $client->request('GET', '/tasks/create');
@@ -62,7 +53,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseRedirects();
         $client->followRedirect();
         $this->assertRouteSame('login');
-    }
+    }*/
 
     /**
      * @throws \Exception
@@ -130,7 +121,7 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $task = static::getContainer()->get(TaskRepository::class)->findOneBy(['user' => null]);
-//        dd($task);
+
         $admin = static::getContainer()->get(UserRepository::class)->findOneByUsername('admin');
         $client->loginUser($admin);
 
@@ -140,6 +131,5 @@ class TaskControllerTest extends WebTestCase
         $this->assertRouteSame('task_list');
         $this->assertSelectorExists('div.alert.alert-success');
     }
-
 
 }

@@ -6,45 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="a9ec9b86-9b5f-4cd9-990b-926aeb4f0fe1" name="Changes" comment="update readme.md">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/DefaultController.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/SecurityController.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/TaskController.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/UserController.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Controller/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Entity/Task.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Entity/User.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Entity/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Entity/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Form/TaskType.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Form/UserType.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Form/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Form/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Repository/TaskRepository.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Repository/UserRepository.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Repository/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Repository/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Security/Voter/TaskVoter.php.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Security/Voter/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Security/Voter/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Security/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/Security/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_css/bootstrap.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_css/custom.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_css/nv.d3.min.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_css/octicons.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_css/style.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_icons/file-code.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_icons/file-directory.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/bootstrap.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/d3.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/file.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/jquery.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/nv.d3.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/_js/popper.min.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/dashboard.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/coverage/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/Controller/DefaultControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/DefaultControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clover.xml" beforeDir="false" afterPath="$PROJECT_DIR$/clover.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coverage.txt" beforeDir="false" afterPath="$PROJECT_DIR$/coverage.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/TaskControllerTest.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/Controller/UserControllerTest.php" beforeDir="false" afterPath="$PROJECT_DIR$/tests/Controller/UserControllerTest.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -299,7 +264,8 @@
       <workItem from="1676912378314" duration="980000" />
       <workItem from="1676965625018" duration="24469000" />
       <workItem from="1677056049501" duration="4186000" />
-      <workItem from="1677070734935" duration="1975000" />
+      <workItem from="1677070734935" duration="8187000" />
+      <workItem from="1677138508461" duration="1301000" />
     </task>
     <task id="LOCAL-00001" summary="update covrage css">
       <created>1676292968724</created>
